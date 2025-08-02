@@ -1,0 +1,57 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header {
+  font-family: 'Great Vibes', cursive;
+  text-align: center;
+  font-size: 2.5rem;
+  margin: 10px 0;
+}
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(5px);
+  padding: 10px;
+  position: sticky;
+  top: 0;
+}
+.navbar a, .navbar button {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.notes, .quotes {
+  width: 90%;
+  max-width: 500px;
+  margin: auto;
+  margin-top: 20px;
+}
+.note, .quote {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+#dark-mode-toggle {
+  border: 1px solid #fff;
+  border-radius: 20px;
+  padding: 5px 10px;
+}
+body.dark {
+  background: linear-gradient(135deg, #2c3e50, #4ca1af);
+  color: #f0f0f0;
+}
+body.dark .note, body.dark .quote, body.dark .navbar {
+  background: rgba(0,0,0,0.3);
+}

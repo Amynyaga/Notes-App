@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️ Favorite Quotes</title>
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>❤️ Favorite Quotes</header>
+<nav class="navbar">
+  <a href="index.html">Notes</a>
+  <a href="quotes.html">Quotes</a>
+  <button id="music-toggle">🎵</button>
+  <button id="dark-mode-toggle">🌙</button>
+</nav>
+
+<div class="quotes">
+  <div class="quote">"Love is not finding someone to live with, it's finding someone you can't live without."</div>
+  <div class="quote">"You are the poem I never knew how to write."</div>
+  <div class="quote">"In your smile, I see something more beautiful than stars."</div>
+</div>
+
+<audio id="bgMusic" src="music/acoustic.mp3" loop></audio>
+
+<script>
+const music = document.getElementById('bgMusic');
+let musicPlaying = false;
+
+document.getElementById('music-toggle').onclick = () => {
+  if (musicPlaying) { music.pause(); } else { music.play(); }
+  musicPlaying = !musicPlaying;
+};
+document.getElementById('dark-mode-toggle').onclick = () => {
+  document.body.classList.toggle('dark');
+};
+window.addEventListener('load', () => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+});
+</script>
+</body>
+</html>

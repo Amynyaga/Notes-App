@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>❤️ Romantic Notes</title>
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>❤️ Romantic Notes</header>
+<nav class="navbar">
+  <a href="index.html">Notes</a>
+  <a href="quotes.html">Quotes</a>
+  <button id="music-toggle">🎵</button>
+  <button id="dark-mode-toggle">🌙</button>
+</nav>
+
+<input type="text" id="noteInput" placeholder="Write your sweet thought..." />
+<button onclick="addNote()">Add Note</button>
+<div class="notes" id="notesContainer"></div>
+
+<audio id="bgMusic" src="music/acoustic.mp3" loop></audio>
+
+<script>
+let notes = JSON.parse(localStorage.getItem('romanticNotes')) || [];
+const music = document.getElementById('bgMusic');
+let musicPlaying = false;
+
+function saveNotes() {
+  localStorage.setItem('romanticNotes', JSON.stringify(notes));
+}
+function renderNotes() {
+  const container = document.getElementById('notesContainer');
+  container.innerHTML = '';
+  notes.forEach((note, index) => {
+    container.innerHTML += `
+      <div class="note">
+        ${note} <button onclick="deleteNote(${index})">❤️</button>
+      </div>`;
+  });
+}
+function addNote() {
+  const input = document.getElementById('noteInput');
+  if(input.value.trim()) {
+    notes.push(input.value.trim());
+    input.value = '';
+    saveNotes();
+    renderNotes();
+  }
+}
+function deleteNote(i) {
+  notes.splice(i,1);
+  saveNotes();
+  renderNotes();
+}
+document.getElementById('music-toggle').onclick = () => {
+  if (musicPlaying) { music.pause(); } else { music.play(); }
+  musicPlaying = !musicPlaying;
+};
+document.getElementById('dark-mode-toggle').onclick = () => {
+  document.body.classList.toggle('dark');
+};
+window.addEventListener('load', () => {
+  renderNotes();
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js');
+  }
+});
+</script>
+</body>
+</html>
